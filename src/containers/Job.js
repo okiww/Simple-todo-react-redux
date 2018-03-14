@@ -3,6 +3,7 @@ import List from './List';
 import { connect } from 'react-redux';
 import { add } from '../actions/Todo';
 import 'bootstrap/dist/css/bootstrap.css';
+import FaPlusSquarO from 'react-icons/lib/fa/plus-square-o';
 import {
   Collapse,
   Navbar,
@@ -57,6 +58,9 @@ class Job extends Component {
 	            padding: 20,
 	            backgroundColor: '#7BC3C0',
 	            height: 50
+	        }, 
+	        faplus: {
+	        	fontSize: "2em"
 	        }
 	    }
 		return (
@@ -68,9 +72,9 @@ class Job extends Component {
 				          <Collapse isOpen={this.state.isOpen} navbar>
 				            <Nav className="ml-auto" navbar>
 				              <UncontrolledDropdown nav inNavbar>
-				                <DropdownToggle nav caret>
-				                  <Button color="success" onClick={this.toggle}>Click</Button>
-				                </DropdownToggle>
+				                
+				                  <FaPlusSquarO style={styles.faplus} onClick={this.toggle} />
+				               
 				              </UncontrolledDropdown>
 				            </Nav>
 				          </Collapse>

@@ -5,6 +5,10 @@ import { check } from '../actions/Todo';
 import Moment from 'react-moment';
 import 'moment-timezone';
 import { Table, Col, Row, Button, FormGroup, Label, Input } from 'reactstrap';
+import FaCircleO from 'react-icons/lib/fa/circle-o';
+import FaCheckCircle from 'react-icons/lib/fa/check-circle';
+import FaEdit from 'react-icons/lib/fa/edit';
+import FaTrash from 'react-icons/lib/fa/trash';
 
 class List extends Component {
 
@@ -34,6 +38,19 @@ class List extends Component {
 	render() {
 		Moment.globalFormat = 'D MMM YYYY';
 		const date = new Date();
+		const styles = {
+	        icon: {
+	        	fontSize: "1.5em",
+	        	cursor: "pointer"
+	        },
+	        done : {
+	        	color : 'green'
+	        },
+	        active : {
+	        	color : 'yellow'
+	        }
+	    }
+
 		return (
 			<Row>
       			<Col>
@@ -55,20 +72,20 @@ class List extends Component {
 				            	<p> { data.name } </p>
 				            </td>
 				            <td>
-				            	<b>{data.checked ? 'checked' : 'unchecked'}</b>
+				            	<b>{data.checked ? <p style={styles.done}> Done </p> : <p style={styles.active}> Active </p>}</b>
 				            </td>
 				            <td>
 				            	<Moment add={{ days: 1, hours: 12 }}>{date}</Moment>
 				            </td>
 							<td>
-								<Button color="danger" onClick={() => {this.delete(data.id)}}> delete </Button> {' '}
-								{data.checked ? (
-									<Button color="warning" onClick={() => {this.checked(data.id)}}> unchecked </Button> 
+								<FaTrash onClick={() => {this.delete(data.id)}} style={styles.icon} /> {' '}
+								{data.checked ? ( 
+									<FaCheckCircle onClick={() => {this.checked(data.id)}} style={styles.icon}/>
 							    ) : (
-									<Button color="success" onClick={() => {this.checked(data.id)}}> checked </Button>
+									<FaCircleO onClick={() => {this.checked(data.id)}} style={styles.icon}/>
 							    )}
 							    {' '}
-							    <Button color="primary" onClick={() => {this.delete(data.id)}}> Edit </Button>
+							    <FaEdit onClick={() => {this.delete(data.id)}} style={styles.icon}/>
 							</td>
 				          </tr>
 				        )}
